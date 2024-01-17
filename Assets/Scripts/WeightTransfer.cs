@@ -39,7 +39,7 @@ public class WeightTransfer : MonoBehaviour
     
  void CalculateWeightTransfer(float acceleration,float carDirection)
     {
-        Debug.Log("carDirection:"+carDirection);
+       
     float MASS_VALUE = 0;
     // If accelerating, move the center of mass towards the back
     if (acceleration > 0)

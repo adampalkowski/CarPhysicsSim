@@ -7,11 +7,14 @@ TagManager:
   - ground
   - Obstacle
   - Weight
+  - Car
+  - Road
+  - ObstacleLayer
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ObstacleLayer
   - Water
   - UI
   - 
@@ -43,6 +46,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: trail
+    uniqueID: 1821977851
     locked: 0
   - name: car
     uniqueID: 1570988475

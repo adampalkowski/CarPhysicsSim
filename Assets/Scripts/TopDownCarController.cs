@@ -7,6 +7,12 @@ public class TopDownCarController : MonoBehaviour
     [Header("Car settings")]
      float velocityVsUp = 0;
 
+    public bool  collisionCheck=false;
+    public float lastAction=0;
+    public float progress=0;
+
+    private int currretCheckPoint=0;
+
     public float driftFactor = 0.95f;
     public float accelerationFactor = 30.0f;
     public float turnFactor = 6.0f;
@@ -20,15 +26,24 @@ public class TopDownCarController : MonoBehaviour
     //Local variables
     float accelerationInput = 0;
     float steeringInput = 0;
-
-    float rotationAngle = 0;
+    float speed=0; 
+    public float rotationAngle = 0;
     WeightTransfer weightTransfer;
-    Rigidbody2D carRigidbody2D;
+    CheckpointManager checkpointManager;
+    
+    SensorRenderer sensorRenderer;
+    public Rigidbody2D carRigidbody2D;
 
+   
     void Awake()
-    {
+    {   
+        
+  
+        checkpointManager = GetComponent<CheckpointManager>();
+         // stores current checkpojnt value 0 to 7    checkpointManager.currentCheckpointIndex
+         sensorRenderer= GetComponent<SensorRenderer>();
         carRigidbody2D = GetComponent<Rigidbody2D>();
-                        weightTransfer = GetComponent<WeightTransfer>();  // Add this line
+        weightTransfer = GetComponent<WeightTransfer>();  // Add this line
         carRigidbody2D.mass = 1.0f;
 
         
@@ -39,15 +54,15 @@ public class TopDownCarController : MonoBehaviour
         ApplySteering();
         ApplyEngineForce();
         KillOrthogonalVelocity();
-       weightTransfer.UpdateWeightTransfer(carRigidbody2D.velocity.magnitude, accelerationInput,carDirection);
-
+        weightTransfer.UpdateWeightTransfer(carRigidbody2D.velocity.magnitude, accelerationInput,carDirection);
+        sensorRenderer.UpdateSensors();
     }
 
     void ApplyEngineForce()
     {
             
         
-      float speed = carRigidbody2D.velocity.magnitude;
+       speed = carRigidbody2D.velocity.magnitude;
    
     float brakingForce = brakingFactor * speed;
 
@@ -135,4 +150,13 @@ void ApplySteering()
     }  
 
 
+     private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // This method is called when a collision occurs
+        // Check if the collision involves the car
+        if (collision.gameObject.CompareTag("Road"))
+        {
+           collisionCheck=true;
+        }
+    }
 }
