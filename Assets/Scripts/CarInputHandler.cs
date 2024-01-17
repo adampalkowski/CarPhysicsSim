@@ -7,10 +7,12 @@ public class CarInputHandler : MonoBehaviour
     //Components
     TopDownCarController topDownCarController;
 
+
     //Awake is called when the script instance is being loaded.
     void Awake()
     {
         topDownCarController = GetComponent<TopDownCarController>();
+
     }
 
     // Start is called before the first frame update
@@ -30,5 +32,6 @@ public class CarInputHandler : MonoBehaviour
 
         //Send the input to the car controller.
         topDownCarController.SetInputVector(inputVector);
+
     }
 }

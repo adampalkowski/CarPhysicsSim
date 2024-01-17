@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ground
   - Obstacle
+  - Weight
   layers:
   - Default
   - TransparentFX
@@ -45,4 +46,7 @@ TagManager:
     locked: 0
   - name: car
     uniqueID: 1570988475
+    locked: 0
+  - name: weight
+    uniqueID: 4154333979
     locked: 0
